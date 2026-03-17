@@ -137,19 +137,16 @@ function Hero({ onNav, onQuickSearch, makes, heroVehicle }) {
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
               <div className="absolute left-0 right-0 bottom-0 p-5 text-white">
                 <p className="text-sm uppercase tracking-[0.2em] text-blue-100">Featured now</p>
-                <h3 className="text-2xl font-semibold">
-                  {heroVehicle.year} {heroVehicle.make} {heroVehicle.model}
-                </h3>
               </div>
             </div>
           )}
           <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-blue-100 ring-1 ring-white/20">
             Premium used SUVs - Transparent pricing
           </p>
-          <h1 className="text-4xl font-bold leading-tight sm:text-5xl font-heading">
+          <h1 className="font-heading font-bold leading-tight text-[1.75rem] sm:text-4xl md:text-[2.75rem] lg:text-5xl sm:leading-tight md:leading-snug">
             Curated SUVs, clear pricing, and quick approvals in one place.
           </h1>
-          <p className="text-lg text-slate-100/90">
+          <p className="text-base sm:text-lg text-slate-100/90">
             Browse, compare payments, and save favorites without losing your spot. Real photos,
             human support, and instant calculations.
           </p>
