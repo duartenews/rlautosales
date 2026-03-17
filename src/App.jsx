@@ -14,7 +14,7 @@ import {
   saveTradeInDraft,
 } from './utils/storage'
 
-const phoneNumber = '+1 (913) 568-8288'
+const phoneNumber = '+1 (913) 388-5321'
 
 const formatPrice = (value) =>
   new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(
@@ -68,10 +68,10 @@ function Header({ onNav }) {
         <div className="flex items-center gap-3">
           <img
             src="/logo.png"
-            alt="Northline Motors"
+            alt="RL Auto Sales"
             className="h-10 w-auto drop-shadow-lg"
           />
-          <p className="text-white font-heading text-xl">Northline Motors</p>
+          <p className="text-white font-heading text-xl">RL Auto Sales</p>
         </div>
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-100/80 lg:flex">
           {links.map((link) => (
@@ -715,7 +715,7 @@ function WhyBuy() {
     <section className="section-light border-y border-slate-200/60" id="whyus">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
-          eyebrow="Why Northline"
+          eyebrow="Why RL Auto Sales"
           title="Trust at every step"
           subtitle="Human support, transparency, and quick decisions."
           align="left"
@@ -740,7 +740,7 @@ function About() {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
           eyebrow="About"
-          title="We are Northline Motors"
+          title="We are RL Auto Sales"
           subtitle="Kansas City team focused on quality used SUVs, fair pricing, and advisory support."
           align="left"
           tone="dark"
@@ -777,7 +777,7 @@ function Contact({ lead, onChange, onSave, saved }) {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
           eyebrow="Contact"
-          title="Reach the Northline team"
+          title="Reach the RL Auto Sales team"
           subtitle="Form drafts save locally until we move to the secure portal."
           align="left"
           tone="dark"
@@ -838,7 +838,7 @@ function Contact({ lead, onChange, onSave, saved }) {
           <div className="space-y-4">
             <div className="rounded-2xl bg-white p-5 shadow-md shadow-slate-200/70 ring-1 ring-slate-200">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Visit</p>
-              <p className="mt-2 font-semibold text-navy">1234 Northline Pkwy, Kansas City, MO 64106</p>
+              <p className="mt-2 font-semibold text-navy">813 N Kansas Ave, Kansas City, MO 64120</p>
               <p className="text-slate-500 text-sm">(Editable placeholder)</p>
               <div className="mt-3 h-40 rounded-xl bg-gradient-to-br from-blue-100 to-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 text-sm">
                 Map placeholder
@@ -869,7 +869,7 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-8 md:grid-cols-4">
           <div>
-            <p className="text-xl font-heading font-semibold">Northline Motors</p>
+            <p className="text-xl font-heading font-semibold">RL Auto Sales</p>
             <p className="mt-3 text-slate-200/80">
               Modern used vehicle center focused on clarity and trust.
             </p>
@@ -903,7 +903,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-white/10 pt-4 text-sm text-slate-300/80">
-          (c) {new Date().getFullYear()} Northline Motors. All rights reserved.
+          (c) {new Date().getFullYear()} RL Auto Sales. All rights reserved.
         </div>
       </div>
     </footer>
