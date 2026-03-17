@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 :root {
-  color: #111827;
-  background: #f8fafc;
+  color: #0f172a;
+  background: #f6f8fb;
   font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,7 +18,7 @@ html {
 
 body {
   margin: 0;
-  background: #0b1220;
+  background: radial-gradient(circle at 20% 20%, #e8eefc 0, #f6f8fb 25%, #f6f8fb 100%);
 }
 
 #root {
@@ -31,20 +31,32 @@ a {
 }
 
 ::selection {
-  background: rgba(29, 78, 216, 0.15);
+  background: rgba(29, 78, 216, 0.18);
   color: #0f172a;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .hero-overlay {
-  background: linear-gradient(120deg, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.9));
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.9));
 }
 
 .smooth-shadow {
-  box-shadow: 0 20px 60px -25px rgba(15, 23, 42, 0.55);
+  box-shadow: 0 18px 48px -24px rgba(15, 23, 42, 0.38);
+}
+
+.section-light {
+  background: #f9fafb;
+}
+
+.section-muted {
+  background: #eef1f6;
+}
+
+.section-dark {
+  background: #0f172a;
 }
