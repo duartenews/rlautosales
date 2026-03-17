@@ -47,7 +47,7 @@ const SectionHeader = ({ eyebrow, title, subtitle, align = 'center', tone = 'dar
 }
 
 const Badge = ({ children }) => (
-  <span className="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700 ring-1 ring-blue-200">
+  <span className="rounded-full bg-white px-3 py-1 text-sm font-semibold text-navy ring-1 ring-slate-200 shadow-sm">
     {children}
   </span>
 )
@@ -108,7 +108,7 @@ function Header({ onNav }) {
   )
 }
 
-function Hero({ onNav, onQuickSearch, makes }) {
+function Hero({ onNav, onQuickSearch, makes, heroVehicle }) {
   const [form, setForm] = useState({ make: '', keyword: '', budget: 28000 })
 
   const handleSubmit = (e) => {
@@ -203,7 +203,7 @@ function Hero({ onNav, onQuickSearch, makes }) {
             <div className="flex flex-wrap gap-3">
               <button
                 type="submit"
-                className="flex-1 rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/30 transition hover:bg-blue-500"
+                className="flex-1 rounded-full bg-white px-5 py-3 text-sm font-semibold text-navy border border-slate-300 shadow-sm transition hover:bg-slate-50"
               >
                 Apply filters
               </button>
@@ -220,6 +220,27 @@ function Hero({ onNav, onQuickSearch, makes }) {
             Inputs stay on this device until we move to the secure portal.
           </p>
         </div>
+
+        {heroVehicle && (
+          <div className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl shadow-black/30 ring-1 ring-white/10">
+            <img
+              src={heroVehicle.image}
+              alt={`${heroVehicle.year} ${heroVehicle.make} ${heroVehicle.model}`}
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+            <div className="absolute left-0 right-0 bottom-0 p-5 text-white">
+              <p className="text-sm uppercase tracking-[0.2em] text-blue-100">Featured now</p>
+              <h3 className="text-2xl font-semibold">
+                {heroVehicle.year} {heroVehicle.make} {heroVehicle.model}
+              </h3>
+              <p className="text-sm text-slate-100">
+                {heroVehicle.trim} • {formatPrice(heroVehicle.price)} •{' '}
+                {heroVehicle.mileage.toLocaleString()} mi
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )
@@ -418,7 +439,7 @@ function Filters({
   )
 }
 
-function VehicleCard({ vehicle, isFavorite, onToggleFavorite }) {
+function VehicleCard({ vehicle, isFavorite, onToggleFavorite, onOpenForm }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl bg-white shadow-lg shadow-slate-200/70 ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl">
       <div className="relative h-56 w-full overflow-hidden bg-silver">
@@ -452,7 +473,10 @@ function VehicleCard({ vehicle, isFavorite, onToggleFavorite }) {
           <span>{vehicle.bodyType}</span>
         </div>
         <div className="mt-auto flex items-center gap-3">
-          <button className="flex-1 rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:bg-blue-700">
+          <button
+            onClick={onOpenForm}
+            className="flex-1 rounded-full bg-navy px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:bg-blue-700"
+          >
             View Details
           </button>
           <button
@@ -466,13 +490,12 @@ function VehicleCard({ vehicle, isFavorite, onToggleFavorite }) {
             {isFavorite ? 'Saved' : 'Save'}
           </button>
         </div>
-        <p className="text-[11px] text-slate-500">Photo: {vehicle.imageAttribution}</p>
       </div>
     </article>
   )
 }
 
-function FinanceSection({ inputs, onChange }) {
+function FinanceSection({ inputs, onChange, onOpenForm }) {
   const principal = Math.max(inputs.price - inputs.downPayment, 0)
   const monthlyRate = inputs.apr / 100 / 12
   const monthlyPayment = monthlyRate
@@ -564,7 +587,10 @@ function FinanceSection({ inputs, onChange }) {
               </div>
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-navy shadow-md shadow-blue-600/25 transition hover:bg-blue-50">
+              <button
+                onClick={onOpenForm}
+                className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-navy shadow-md shadow-blue-600/25 transition hover:bg-blue-50"
+              >
                 Share with finance team
               </button>
               <p className="text-slate-200/80 text-sm">
@@ -578,7 +604,7 @@ function FinanceSection({ inputs, onChange }) {
   )
 }
 
-function TradeInSection({ draft, onChange, onSave, saved }) {
+function TradeInSection({ draft, onChange, onSave, saved, onOpenForm }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     onSave()
@@ -632,13 +658,12 @@ function TradeInSection({ draft, onChange, onSave, saved }) {
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <button
               type="submit"
+              onClick={onOpenForm}
               className="rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:bg-blue-700"
             >
-              Save trade-in locally
+              Send
             </button>
-            <p className="text-slate-600 text-sm">
-              Your details stay on this device. No obligation.
-            </p>
+            <p className="text-slate-600 text-sm">You will be contacted shortly with more details.</p>
             {saved && <Badge>Draft saved</Badge>}
           </div>
         </form>
@@ -766,7 +791,7 @@ function About() {
   )
 }
 
-function Contact({ lead, onChange, onSave, saved }) {
+function Contact({ lead, onChange, onSave, saved, onOpenForm }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     onSave()
@@ -824,12 +849,13 @@ function Contact({ lead, onChange, onSave, saved }) {
               <div className="md:col-span-2 flex flex-wrap items-center gap-3">
                 <button
                   type="submit"
+                  onClick={onOpenForm}
                   className="rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:bg-blue-700"
                 >
-                  Save inquiry locally
+                  Send inquiry
                 </button>
                 <p className="text-slate-600 text-sm">
-                  Draft saved on this device. We confirm by phone or email.
+                  We will contact you shortly with more details.
                 </p>
                 {saved && <Badge>Inquiry saved</Badge>}
               </div>
@@ -839,9 +865,17 @@ function Contact({ lead, onChange, onSave, saved }) {
             <div className="rounded-2xl bg-white p-5 shadow-md shadow-slate-200/70 ring-1 ring-slate-200">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Visit</p>
               <p className="mt-2 font-semibold text-navy">813 N Kansas Ave, Kansas City, MO 64120</p>
-              <p className="text-slate-500 text-sm">(Editable placeholder)</p>
-              <div className="mt-3 h-40 rounded-xl bg-gradient-to-br from-blue-100 to-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 text-sm">
-                Map placeholder
+              <div className="mt-3 overflow-hidden rounded-xl border border-slate-200">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!3m2!1spt-BR!2sbr!4v1773767300486!5m2!1spt-BR!2sbr!6m8!1m7!1siYeVV01mrtW--ejVhqOG0Q!2m2!1d39.12289571103503!2d-94.54649050305609!3f282.01575722040525!4f1.4865794695197678!5f0.4000000000000002"
+                  width="100%"
+                  height="260"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="RL Auto Sales Location"
+                />
               </div>
             </div>
             <div className="rounded-2xl bg-white p-5 text-sm text-slate-700 shadow-md shadow-slate-200/70 ring-1 ring-slate-200">
@@ -910,6 +944,77 @@ function Footer() {
   )
 }
 
+function ContactModal({ open, onClose, lead, onChange, onSubmit, title }) {
+  if (!open) return null
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-slate-200">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">
+              Contact form
+            </p>
+            <h3 className="text-xl font-semibold text-navy">{title}</h3>
+          </div>
+          <button
+            onClick={onClose}
+            className="rounded-full border border-slate-200 px-2 py-1 text-sm text-slate-500 hover:bg-slate-50"
+          >
+            Close
+          </button>
+        </div>
+        <form className="mt-4 space-y-3" onSubmit={onSubmit}>
+          <label className="block text-sm font-medium text-slate-700">
+            Name
+            <input
+              type="text"
+              value={lead.name}
+              onChange={(e) => onChange({ ...lead, name: e.target.value })}
+              className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 text-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </label>
+          <label className="block text-sm font-medium text-slate-700">
+            Email
+            <input
+              type="email"
+              value={lead.email}
+              onChange={(e) => onChange({ ...lead, email: e.target.value })}
+              className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 text-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </label>
+          <label className="block text-sm font-medium text-slate-700">
+            Phone
+            <input
+              type="tel"
+              value={lead.phone}
+              onChange={(e) => onChange({ ...lead, phone: e.target.value })}
+              className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 text-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </label>
+          <label className="block text-sm font-medium text-slate-700">
+            Notes
+            <input
+              type="text"
+              value={lead.message}
+              onChange={(e) => onChange({ ...lead, message: e.target.value })}
+              className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 text-sm focus:border-blue-500 focus:ring-blue-500"
+            />
+          </label>
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <button
+              type="submit"
+              className="rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:bg-blue-700"
+            >
+              Send
+            </button>
+            <p className="text-sm text-slate-600">We will contact you shortly with more details.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
+}
+
 function App() {
   const initialInventory = useMemo(() => getInventory(seedInventory), [])
   const [inventory] = useState(initialInventory)
@@ -939,6 +1044,8 @@ function App() {
   const [leadDraft, setLeadDraft] = useState(() => getLeadDraft())
   const [tradeSaved, setTradeSaved] = useState(false)
   const [leadSaved, setLeadSaved] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalTitle, setModalTitle] = useState('Vehicle inquiry')
 
   useEffect(() => {
     saveFavorites(favorites)
@@ -965,6 +1072,17 @@ function App() {
   const handleNav = (id) => {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const openContactModal = (title) => {
+    setModalTitle(title || 'Vehicle inquiry')
+    setModalOpen(true)
+  }
+
+  const handleModalSubmit = (e) => {
+    e.preventDefault()
+    setLeadSaved(true)
+    setModalOpen(false)
   }
 
   const handleQuickSearch = ({ make, keyword, budget }) => {
@@ -1005,6 +1123,7 @@ function App() {
     () => inventory.filter((v) => v.featured),
     [inventory],
   )
+  const heroVehicle = featuredVehicles[0] || inventory[0]
 
   const makes = useMemo(
     () => [...new Set(inventory.map((v) => v.make))],
@@ -1029,8 +1148,16 @@ function App() {
 
   return (
     <div className="min-h-screen">
+      <ContactModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        lead={leadDraft}
+        onChange={setLeadDraft}
+        onSubmit={handleModalSubmit}
+        title={modalTitle}
+      />
       <Header onNav={handleNav} />
-      <Hero onNav={handleNav} onQuickSearch={handleQuickSearch} makes={makes} />
+      <Hero onNav={handleNav} onQuickSearch={handleQuickSearch} makes={makes} heroVehicle={heroVehicle} />
       <QuickActions onNav={handleNav} />
 
       <section id="inventory" className="bg-white">
@@ -1049,6 +1176,9 @@ function App() {
                 vehicle={vehicle}
                 isFavorite={favorites.includes(vehicle.id)}
                 onToggleFavorite={toggleFavorite}
+                onOpenForm={() =>
+                  openContactModal(`I'm interested in the ${vehicle.year} ${vehicle.make} ${vehicle.model}`)
+                }
               />
             ))}
           </div>
@@ -1079,6 +1209,9 @@ function App() {
                   vehicle={vehicle}
                   isFavorite={favorites.includes(vehicle.id)}
                   onToggleFavorite={toggleFavorite}
+                  onOpenForm={() =>
+                    openContactModal(`I'm interested in the ${vehicle.year} ${vehicle.make} ${vehicle.model}`)
+                  }
                 />
               ))}
               {filteredInventory.length === 0 && (
@@ -1091,12 +1224,17 @@ function App() {
         </div>
       </section>
 
-      <FinanceSection inputs={financeInputs} onChange={setFinanceInputs} />
+      <FinanceSection
+        inputs={financeInputs}
+        onChange={setFinanceInputs}
+        onOpenForm={() => openContactModal('Finance team follow-up')}
+      />
       <TradeInSection
         draft={tradeInDraft}
         onChange={setTradeInDraft}
         onSave={() => setTradeSaved(true)}
         saved={tradeSaved}
+        onOpenForm={() => openContactModal('Trade-in follow-up')}
       />
       <Specials />
       <WhyBuy />
@@ -1106,6 +1244,7 @@ function App() {
         onChange={setLeadDraft}
         onSave={() => setLeadSaved(true)}
         saved={leadSaved}
+        onOpenForm={() => openContactModal('Contact RL Auto Sales')}
       />
       <Footer />
     </div>
