@@ -124,6 +124,25 @@ function Hero({ onNav, onQuickSearch, makes, heroVehicle }) {
       </div>
       <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:py-20">
         <div className="max-w-2xl space-y-6">
+          {heroVehicle && (
+            <div
+              className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl shadow-black/30 ring-1 ring-white/10"
+              style={{ maxHeight: 160 }}
+            >
+              <img
+                src={heroVehicle.image}
+                alt={`${heroVehicle.year} ${heroVehicle.make} ${heroVehicle.model}`}
+                className="h-full w-full object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+              <div className="absolute left-0 right-0 bottom-0 p-5 text-white">
+                <p className="text-sm uppercase tracking-[0.2em] text-blue-100">Featured now</p>
+                <h3 className="text-2xl font-semibold">
+                  {heroVehicle.year} {heroVehicle.make} {heroVehicle.model}
+                </h3>
+              </div>
+            </div>
+          )}
           <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-blue-100 ring-1 ring-white/20">
             Premium used SUVs - Transparent pricing
           </p>
@@ -220,27 +239,6 @@ function Hero({ onNav, onQuickSearch, makes, heroVehicle }) {
             Inputs stay on this device until we move to the secure portal.
           </p>
         </div>
-
-        {heroVehicle && (
-          <div className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl shadow-black/30 ring-1 ring-white/10">
-            <img
-              src={heroVehicle.image}
-              alt={`${heroVehicle.year} ${heroVehicle.make} ${heroVehicle.model}`}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-            <div className="absolute left-0 right-0 bottom-0 p-5 text-white">
-              <p className="text-sm uppercase tracking-[0.2em] text-blue-100">Featured now</p>
-              <h3 className="text-2xl font-semibold">
-                {heroVehicle.year} {heroVehicle.make} {heroVehicle.model}
-              </h3>
-              <p className="text-sm text-slate-100">
-                {heroVehicle.trim} • {formatPrice(heroVehicle.price)} •{' '}
-                {heroVehicle.mileage.toLocaleString()} mi
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   )
