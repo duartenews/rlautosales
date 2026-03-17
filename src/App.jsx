@@ -66,13 +66,12 @@ function Header({ onNav }) {
     <header className="sticky top-0 z-50 border-b border-white/10 bg-navy/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/25">
-            NM
-          </div>
-          <div>
-            <p className="text-white font-heading text-xl">Northline Motors</p>
-            <p className="text-sm text-slate-200/80">Used Vehicle Center</p>
-          </div>
+          <img
+            src="/logo.png"
+            alt="Northline Motors"
+            className="h-10 w-auto drop-shadow-lg"
+          />
+          <p className="text-white font-heading text-xl">Northline Motors</p>
         </div>
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-100/80 lg:flex">
           {links.map((link) => (
@@ -126,14 +125,14 @@ function Hero({ onNav, onQuickSearch, makes }) {
       <div className="relative mx-auto flex max-w-6xl flex-col gap-12 px-4 py-16 sm:px-6 lg:flex-row lg:items-center lg:py-20">
         <div className="max-w-2xl space-y-6">
           <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-blue-100 ring-1 ring-white/20">
-            Premium used SUVs • Transparent pricing
+            Premium used SUVs - Transparent pricing
           </p>
           <h1 className="text-4xl font-bold leading-tight sm:text-5xl font-heading">
-            SUVs selecionados, preços claros e aprovação fácil em um só lugar.
+            Curated SUVs, clear pricing, and quick approvals in one place.
           </h1>
           <p className="text-lg text-slate-100/90">
-            Navegue, compare pagamentos e salve favoritos sem perder o contexto. Atendimento
-            humano, fotos reais e cálculos instantâneos.
+            Browse, compare payments, and save favorites without losing your spot. Real photos,
+            human support, and instant calculations.
           </p>
           <div className="flex flex-wrap gap-3">
             <button
@@ -153,9 +152,9 @@ function Hero({ onNav, onQuickSearch, makes }) {
 
         <div className="w-full max-w-xl rounded-2xl bg-white p-6 text-navy shadow-2xl shadow-black/25 ring-1 ring-slate-200">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-700">
-            Buscar rápido
+            Quick search
           </p>
-          <h3 className="mt-2 text-xl font-semibold">Encontre o SUV ideal</h3>
+          <h3 className="mt-2 text-xl font-semibold">Find the right SUV fast</h3>
           <form className="mt-4 space-y-3" onSubmit={handleSubmit}>
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="text-sm text-slate-600">
@@ -174,7 +173,7 @@ function Hero({ onNav, onQuickSearch, makes }) {
                 </select>
               </label>
               <label className="text-sm text-slate-600">
-                Modelo ou palavra-chave
+                Model or keyword
                 <input
                   type="text"
                   value={form.keyword}
@@ -185,7 +184,7 @@ function Hero({ onNav, onQuickSearch, makes }) {
               </label>
             </div>
             <label className="block text-sm text-slate-600">
-              Budget (máx.)
+              Budget (max)
               <div className="mt-2 flex items-center gap-3">
                 <input
                   type="range"
@@ -206,19 +205,19 @@ function Hero({ onNav, onQuickSearch, makes }) {
                 type="submit"
                 className="flex-1 rounded-full bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/30 transition hover:bg-blue-500"
               >
-                Aplicar filtros
+                Apply filters
               </button>
               <button
                 type="button"
                 onClick={() => onNav('inventory')}
                 className="rounded-full border border-slate-300 px-4 py-3 text-sm font-semibold text-navy hover:bg-slate-50"
               >
-                Ver inventário
+                View inventory
               </button>
             </div>
           </form>
           <p className="mt-3 text-xs text-slate-500">
-            Dados permanecem localmente até migrarmos para o portal seguro.
+            Inputs stay on this device until we move to the secure portal.
           </p>
         </div>
       </div>
@@ -230,22 +229,22 @@ function QuickActions({ onNav }) {
   const actions = [
     {
       title: 'Browse Used SUVs',
-      desc: 'Veja fotos reais e preços claros.',
+      desc: 'See real photos and transparent pricing.',
       target: 'inventory',
     },
     {
       title: 'Value Your Trade',
-      desc: 'Envie seu veículo e salve o rascunho.',
+      desc: 'Send your vehicle details and save the draft.',
       target: 'tradein',
     },
     {
       title: 'Estimate Payments',
-      desc: 'Calcule parcelas em segundos.',
+      desc: 'Calculate payments in seconds.',
       target: 'finance',
     },
     {
       title: 'Schedule a Visit',
-      desc: 'Combine horário direto com a equipe.',
+      desc: 'Pick a time with the team quickly.',
       target: 'contact',
     },
   ]
@@ -288,13 +287,13 @@ function Filters({
       <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
         <div>
           <label className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-            Busca
+            Search
           </label>
           <input
             type="text"
             value={filters.search}
             onChange={(e) => onChange({ ...filters, search: e.target.value })}
-            placeholder="Make, modelo ou palavra-chave"
+            placeholder="Make, model, or keyword"
             className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
@@ -351,7 +350,7 @@ function Filters({
         </div>
         <div>
           <label className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-            <span>Preço máx.</span>
+            <span>Max price</span>
             <span className="text-sm font-semibold text-navy">{formatPrice(filters.maxPrice)}</span>
           </label>
           <input
@@ -366,7 +365,7 @@ function Filters({
         </div>
         <div>
           <label className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-            <span>Mileage máx.</span>
+            <span>Max mileage</span>
             <span className="text-sm font-semibold text-navy">
               {filters.maxMileage.toLocaleString()} mi
             </span>
@@ -383,7 +382,7 @@ function Filters({
         </div>
         <div>
           <label className="flex items-center justify-between text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-            <span>Parcela máx.</span>
+            <span>Max monthly</span>
             <span className="text-sm font-semibold text-navy">
               {formatPrice(filters.maxMonthly)} /mo
             </span>
@@ -400,7 +399,7 @@ function Filters({
         </div>
         <div>
           <label className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">
-            Ano mínimo
+            Min year
           </label>
           <select
             value={filters.minYear}
@@ -484,9 +483,9 @@ function FinanceSection({ inputs, onChange }) {
     <section id="finance" className="section-muted border-y border-slate-200/70">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
-          eyebrow="Financiamento"
-          title="Simule pagamentos com clareza"
-          subtitle="Ajuste entrada, prazo e APR para ver a parcela estimada. Seus dados ficam salvos neste dispositivo."
+          eyebrow="Finance"
+          title="Plan monthly payments with clarity"
+          subtitle="Adjust down payment, term, and APR to see an estimated payment. Your inputs stay on this device."
           align="left"
           tone="dark"
         />
@@ -536,13 +535,13 @@ function FinanceSection({ inputs, onChange }) {
           </div>
           <div className="rounded-2xl bg-navy text-white p-6 shadow-lg shadow-navy/30">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-200">
-              Estimativa
+              Estimate
             </p>
             <h3 className="mt-3 text-4xl font-bold">
-              {formatPrice(monthlyPayment || 0)} / mês
+              {formatPrice(monthlyPayment || 0)} / mo
             </h3>
             <p className="mt-2 text-slate-200">
-              Baseado nos valores informados. Tributos e taxas adicionais podem se aplicar.
+              Based on your inputs. Taxes, title, and fees may apply.
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
               <div className="rounded-xl bg-white/10 p-4">
@@ -566,10 +565,10 @@ function FinanceSection({ inputs, onChange }) {
             </div>
             <div className="mt-6 flex flex-wrap gap-3">
               <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-navy shadow-md shadow-blue-600/25 transition hover:bg-blue-50">
-                Enviar à equipe financeira
+                Share with finance team
               </button>
               <p className="text-slate-200/80 text-sm">
-                Seus inputs permanecem locais até migrarmos para o portal seguro.
+                Your numbers stay on this device until we move to the secure portal.
               </p>
             </div>
           </div>
@@ -590,8 +589,8 @@ function TradeInSection({ draft, onChange, onSave, saved }) {
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
           eyebrow="Trade-In"
-          title="Avalie seu veículo sem burocracia"
-          subtitle="Envie detalhes, salve localmente e receba retorno rápido da equipe."
+          title="Get a trade value without hassle"
+          subtitle="Send details, save locally, and our team replies quickly."
           align="left"
           tone="dark"
         />
@@ -635,12 +634,12 @@ function TradeInSection({ draft, onChange, onSave, saved }) {
               type="submit"
               className="rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:bg-blue-700"
             >
-              Salvar trade-in localmente
+              Save trade-in locally
             </button>
             <p className="text-slate-600 text-sm">
-              Seus detalhes ficam salvos neste dispositivo. Sem compromisso.
+              Your details stay on this device. No obligation.
             </p>
-            {saved && <Badge>Rascunho salvo</Badge>}
+            {saved && <Badge>Draft saved</Badge>}
           </div>
         </form>
       </div>
@@ -651,19 +650,19 @@ function TradeInSection({ draft, onChange, onSave, saved }) {
 function Specials() {
   const cards = [
     {
-      title: 'Financiamento flexível',
-      copy: 'Opções com entrada acessível e aprovação ágil.',
-      cta: 'Ver opções',
+      title: 'Flexible financing',
+      copy: 'Accessible down payments and quick approvals.',
+      cta: 'See options',
     },
     {
-      title: 'Trade-in valorizado',
-      copy: 'Avaliação real baseada em dados de mercado ao vivo.',
-      cta: 'Iniciar avaliação',
+      title: 'Strong trade-in values',
+      copy: 'Real-time market data to maximize your equity.',
+      cta: 'Start appraisal',
     },
     {
-      title: 'SUVs em destaque',
-      copy: 'Seleção semanal pronta para entrega com preços claros.',
-      cta: 'Ver destaques',
+      title: 'Featured SUVs',
+      copy: 'Weekly selections ready for delivery with clear pricing.',
+      cta: 'View picks',
     },
   ]
 
@@ -671,9 +670,9 @@ function Specials() {
     <section id="specials" className="section-dark text-white">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
-          eyebrow="Ofertas"
-          title="Destaques da semana"
-          subtitle="Transparência, rapidez e benefícios reais."
+          eyebrow="Specials"
+          title="This week's highlights"
+          subtitle="Transparency, speed, and real benefits."
           align="left"
           tone="light"
         />
@@ -699,16 +698,16 @@ function Specials() {
 function WhyBuy() {
   const items = [
     {
-      title: 'Seleção criteriosa',
-      desc: 'SUVs inspecionados, recondicionados e prontos para dirigir.',
+      title: 'Carefully selected',
+      desc: 'Inspected, reconditioned SUVs ready to drive.',
     },
     {
-      title: 'Financiamento assistido',
-      desc: 'Lenders regionais e suporte completo para vários perfis de crédito.',
+      title: 'Financing support',
+      desc: 'Regional lenders and full guidance for many credit profiles.',
     },
     {
-      title: 'Processo claro',
-      desc: 'Preços à vista, favoritos salvos e comunicação rápida.',
+      title: 'Straightforward process',
+      desc: 'Upfront prices, saved favorites, and fast communication.',
     },
   ]
 
@@ -716,9 +715,9 @@ function WhyBuy() {
     <section className="section-light border-y border-slate-200/60" id="whyus">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
-          eyebrow="Por que Northline"
-          title="Confiança em cada etapa"
-          subtitle="Atendimento humano, transparência e decisão rápida."
+          eyebrow="Why Northline"
+          title="Trust at every step"
+          subtitle="Human support, transparency, and quick decisions."
           align="left"
           tone="dark"
         />
@@ -740,25 +739,25 @@ function About() {
     <section id="about" className="bg-white">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
-          eyebrow="Sobre"
-          title="Somos a Northline Motors"
-          subtitle="Equipe do Kansas City focada em SUVs usados de qualidade, preço justo e suporte consultivo."
+          eyebrow="About"
+          title="We are Northline Motors"
+          subtitle="Kansas City team focused on quality used SUVs, fair pricing, and advisory support."
           align="left"
           tone="dark"
         />
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="space-y-4 text-slate-700">
-            <h3 className="text-xl font-semibold text-navy">Qualidade e transparência</h3>
+            <h3 className="text-xl font-semibold text-navy">Quality and transparency</h3>
             <p>
-              Curadoria de inventário com histórico limpo, fotos reais e preços baseados em dados.
-              Oferecemos opções de proteção, financiamento e entrega coordenada.
+              Inventory curation with clean histories, real photos, and data-driven pricing. We offer
+              protection options, financing, and coordinated delivery.
             </p>
           </div>
           <div className="space-y-4 text-slate-700">
-            <h3 className="text-xl font-semibold text-navy">Atendimento próximo</h3>
+            <h3 className="text-xl font-semibold text-navy">Supportive experience</h3>
             <p>
-              Precisa de orientação? Salve favoritos, simule pagamentos e envie perguntas sem perder
-              progresso. Nosso time responde rápido e mantém o processo simples.
+              Need guidance? Save favorites, run payments, and send questions without losing
+              progress. Our team responds quickly and keeps it simple.
             </p>
           </div>
         </div>
@@ -777,9 +776,9 @@ function Contact({ lead, onChange, onSave, saved }) {
     <section id="contact" className="section-muted">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHeader
-          eyebrow="Contato"
-          title="Fale com a equipe Northline"
-          subtitle="Formulário salvo localmente até migrarmos para o portal seguro."
+          eyebrow="Contact"
+          title="Reach the Northline team"
+          subtitle="Form drafts save locally until we move to the secure portal."
           align="left"
           tone="dark"
         />
@@ -814,7 +813,7 @@ function Contact({ lead, onChange, onSave, saved }) {
                 />
               </label>
               <label className="text-sm font-medium text-slate-700">
-                Interesses ou prazo
+                Interest or timeline
                 <input
                   type="text"
                   value={lead.message}
@@ -827,20 +826,20 @@ function Contact({ lead, onChange, onSave, saved }) {
                   type="submit"
                   className="rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/25 transition hover:bg-blue-700"
                 >
-                  Salvar contato localmente
+                  Save inquiry locally
                 </button>
                 <p className="text-slate-600 text-sm">
-                  Rascunho salvo neste dispositivo. Confirmamos por telefone ou email.
+                  Draft saved on this device. We confirm by phone or email.
                 </p>
-                {saved && <Badge>Contato salvo</Badge>}
+                {saved && <Badge>Inquiry saved</Badge>}
               </div>
             </form>
           </div>
           <div className="space-y-4">
             <div className="rounded-2xl bg-white p-5 shadow-md shadow-slate-200/70 ring-1 ring-slate-200">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Visite</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-700">Visit</p>
               <p className="mt-2 font-semibold text-navy">1234 Northline Pkwy, Kansas City, MO 64106</p>
-              <p className="text-slate-500 text-sm">(Endereço editável)</p>
+              <p className="text-slate-500 text-sm">(Editable placeholder)</p>
               <div className="mt-3 h-40 rounded-xl bg-gradient-to-br from-blue-100 to-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 text-sm">
                 Map placeholder
               </div>
@@ -848,8 +847,8 @@ function Contact({ lead, onChange, onSave, saved }) {
             <div className="rounded-2xl bg-white p-5 text-sm text-slate-700 shadow-md shadow-slate-200/70 ring-1 ring-slate-200">
               <p className="text-navy font-semibold">Business hours</p>
               <ul className="mt-2 space-y-1">
-                <li>Mon–Fri: 9:00 AM – 7:00 PM</li>
-                <li>Sat: 9:00 AM – 6:00 PM</li>
+                <li>Mon-Fri: 9:00 AM - 7:00 PM</li>
+                <li>Sat: 9:00 AM - 6:00 PM</li>
                 <li>Sun: Closed</li>
               </ul>
               <p className="mt-3 text-navy font-semibold">Call us</p>
@@ -872,10 +871,10 @@ function Footer() {
           <div>
             <p className="text-xl font-heading font-semibold">Northline Motors</p>
             <p className="mt-3 text-slate-200/80">
-              Modern used vehicle center focado em clareza e confiança.
+              Modern used vehicle center focused on clarity and trust.
             </p>
             <p className="mt-4 text-sm text-slate-300/80">
-              Versão atual usa armazenamento local no dispositivo. Arquitetura pronta para API.
+              Current version uses on-device storage. Architecture is API-ready.
             </p>
           </div>
           <div>
@@ -904,7 +903,7 @@ function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t border-white/10 pt-4 text-sm text-slate-300/80">
-          © {new Date().getFullYear()} Northline Motors. All rights reserved.
+          (c) {new Date().getFullYear()} Northline Motors. All rights reserved.
         </div>
       </div>
     </footer>
@@ -1037,9 +1036,9 @@ function App() {
       <section id="inventory" className="bg-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <SectionHeader
-            eyebrow="Destaques"
-            title="SUVs em destaque"
-            subtitle="Fotos reais, preços claros e prontos para entregar."
+            eyebrow="Featured"
+            title="Featured SUVs"
+            subtitle="Real photos, clear prices, ready to drive home."
             align="left"
             tone="dark"
           />
@@ -1058,7 +1057,7 @@ function App() {
             <SectionHeader
               eyebrow="Inventory"
               title="Shop the full lineup"
-              subtitle="Filtros rápidos por preço, mensalidade, ano, body style e palavra-chave."
+              subtitle="Quick filters for price, monthly payment, year, body style, and keywords."
               align="left"
               tone="dark"
             />
@@ -1084,7 +1083,7 @@ function App() {
               ))}
               {filteredInventory.length === 0 && (
                 <div className="md:col-span-2 lg:col-span-3 rounded-2xl bg-slate-50 p-6 text-center text-slate-600 ring-1 ring-slate-200">
-                  Nenhum veículo corresponde aos filtros. Ajuste preço, ano ou palavra-chave.
+                  No vehicles match these filters. Adjust price, year, or keywords.
                 </div>
               )}
             </div>
